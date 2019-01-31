@@ -1,4 +1,13 @@
 ---
+
+# TODO find a better place for this basic config
+- name: Ensure sudo users didnt need a password
+  lineinfile:
+    path: /etc/sudoers
+    state: present
+    regexp: '^%wheel\s'
+    line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+
 - name: Ensure user group exists
   group:
     name: "{{ user_group | default(user_name) | lower }}"

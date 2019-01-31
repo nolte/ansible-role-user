@@ -9,6 +9,8 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 def test_user_can_do_sudo(host):
     with host.sudo():
         with host.sudo("parkerpeater"):
-            host.check_output("whoami")
+            currentUser = host.check_output("whoami")
+            assert currentUser == "parkerpeater"
             with host.sudo("root"):
-                assert True
+                currentUser = host.check_output("whoami")
+                assert currentUser == "root"
