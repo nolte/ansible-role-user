@@ -17,9 +17,14 @@ provisioner:
         user_groups: wheel
   lint:
     name: ansible-lint
+  playbooks:
+    converge: ../resources/playbooks/playbook.yml
 scenario:
   name: adminuser
 verifier:
   name: testinfra
+  directory: ../resources/tests/base
+  additional_files_or_dirs:
+    - ../sudos/
   lint:
     name: flake8
