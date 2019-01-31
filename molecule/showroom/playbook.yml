@@ -1,0 +1,24 @@
+---
+- name: Converge
+  hosts: all
+  roles:
+
+    - name: "create a classic admin user"
+      role: "{{ playbook_dir }}/../../."
+      vars:
+        user_name: parkerpeater
+        user_groups: wheel
+        user_authorized_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQCqGKukO1De7zhZj6+H0qtjTkVxwTCpvKe4eCZ0FPqri0cb2JZfXJ/DgYSF6vUpwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/3j+skZ6UtW+5u09lHNsj6tQ51s1SPrCBkedbNf0Tp0GbMJDyR4e9T04ZZw== phpseclib-generated-key"
+
+    - name: "create a non admin user"
+      role: "{{ playbook_dir }}/../../."
+      vars:
+        user_name: normal
+        user_authorized_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQCqGKukO1De7zhZj6+H0qtjTkVxwTCpvKe4eCZ0FPqri0cb2JZfXJ/DgYSF6vUpwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/3j+skZ6UtW+5u09lHNsj6tQ51s1SPrCBkedbNf0Tp0GbMJDyR4e9T04ZZw== phpseclib-generated-key"
+
+    - name: "create a local system service account"
+      role: "{{ playbook_dir }}/../../."
+      vars:
+        user_name: serviceuser
+        user_groups: wheel
+        user_system: true

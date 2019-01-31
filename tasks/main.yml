@@ -8,6 +8,7 @@
     regexp: '^%wheel\s'
     line: '%wheel ALL=(ALL) NOPASSWD: ALL'
 
+
 - name: Ensure user group exists
   group:
     name: "{{ user_group | default(user_name) | lower }}"
@@ -25,3 +26,11 @@
     remove: "{{ user_remove | default('yes') }}"
     update_password: "{{ user_update_password | default('on_create') }}"
     system: "{{ user_system | default(false) }}"
+
+
+- name: Set authorized key taken from file
+  authorized_key:
+    user: "{{ user_name | lower }}"
+    state: "{{ user_authorized_key_state | default(user_state) | default('present') }}"
+    key: "{{ user_authorized_key }}"
+  when: user_authorized_key is defined

@@ -1,0 +1,23 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+lint:
+  name: yamllint
+platforms:
+  - name: instance
+    image: centos:7
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+scenario:
+  name: showroom
+verifier:
+  name: testinfra
+  directory: ../resources/tests/base
+  additional_files_or_dirs:
+    - ../sudos/
+  lint:
+    name: flake8
