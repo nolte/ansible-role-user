@@ -2,4 +2,4 @@
 - name: Converge
   hosts: all
   roles:
-    - role: "{{ playbook_dir }}/./../../"
+    - role: "{{ playbook_dir }}/./../../../"
