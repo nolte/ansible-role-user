@@ -1,0 +1,18 @@
+---
+- name: Ensure user group exists
+  group:
+    name: "{{ user_group | default(user_name) | lower }}"
+    state: "{{ user_group_state | default(user_state) | default('present') }}"
+
+
+- name: handle user
+  user:
+    name: "{{ user_name | lower }}"
+    comment: "{{ user_comment | default('') }}"
+    group: "{{ user_group | default(user_name) | lower }}"
+    groups: "{{ user_groups | default([]) | lower }}"
+    append: "{{ user_groups_append | default(true) }}"
+    state: "{{ user_state | default('present') }}"
+    remove: "{{ user_remove | default('yes') }}"
+    update_password: "{{ user_update_password | default('on_create') }}"
+    system: "{{ user_system | default(false) }}"
